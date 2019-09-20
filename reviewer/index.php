@@ -20,6 +20,7 @@
 		var tipNo = $("input").val();
 		tip_no = tipNo
 		$.ajax({
+			/*url:"https://5d1b152edd81710014e8825d.mockapi.io/fixnix/investigator/"+tipNo,*/
 			url:"https://5d1b152edd81710014e8825d.mockapi.io/fixnix/whistle/"+tipNo,
 			method:"GET",
 			type:"json",
@@ -45,7 +46,7 @@
 				$("#howdoyouaware").text(data.howdoyouaware)
 				$("#personsInvolved").text(data.personsInvolved)
 				$("#monetaryValue").text(data.monetaryValue)
-				$("#YES").text(data.YES)
+				$("#authknows").text(data.authknows)
                 $("#nature").text(data.nature)
 				$("#place").text(data.place)
 				$("#Reward").text(data.Reward)
@@ -55,10 +56,10 @@
                 $("#NameAuth").text(data.NameAuth)
                 $("#EmailAuth").text(data.EmailAuth)
                 $("#PhoneAuth").text(data.PhoneAuth)
-                $("#SMLoss").text(data.SMLoss)
+               /* $("#SMLoss").text(data.SMLoss)
                 $("#MOperandi").text(data.MOperandi)
                 $("#WBUpdate").text(data.WBUpdate)
-                $("#MUpdate").text(data.MUpdate) 
+                $("#MUpdate").text(data.MUpdate) */
                 
 
 				$("#encryptedSecret").text(data.encryptedSecret)
@@ -68,6 +69,36 @@
 				}
 				console.log(conversations)
 				$(".conversations").html(conversations?conversations:"<p> Please start the conversation</p>")
+			}
+		})
+
+		$.ajax({
+			url:"http://5d1b152edd81710014e8825d.mockapi.io/fixnix/whistle/1/investigator/"+tipNo,
+			/*url:"https://5d1b152edd81710014e8825d.mockapi.io/fixnix/whistle/"+tipNo,*/
+			method:"GET",
+			type:"json",
+			success:function(data){
+				tip_data = data;
+				var messages_array = data.conversations.split("##")
+				var messages_list = []
+				for(var i =0 ;i<messages_array.length;i++){
+					var result = messages_array[i].split("-")
+					var datalist ={
+						user_type:result[0],
+						message: result[1],
+						time: result[2]
+					}
+					messages_list.push(datalist)
+				}
+				$(".container").removeClass('hide')
+                $("#SMLoss").text(data.SMLoss)
+                $("#MOperandi").text(data.MOperandi)
+                $("#WBUpdate").text(data.WBUpdate)
+                $("#MUpdate").text(data.MUpdate) 
+                
+
+				$("#encryptedSecret").text(data.encryptedSecret)
+				
 			}
 		})
 	}
@@ -94,11 +125,7 @@
 			}
 		})
 	}
-    
-    
-
-
-
+ 
 	setInterval(()=>{
 		var tip = $("input").val();
 		if(tip){
@@ -255,7 +282,7 @@
 			</div>-->
 			<div class="col-md-5">
 				<label style="font-size: 14px;margin-left: 90px;">Authorities Know</label><br>
-				<span id="YES" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
+				<span id="authknows" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
 			</div>
 
 			<div class="col-md-5">
@@ -265,7 +292,7 @@
 	</div>
 
 <br>
- <div class="container hide" id="data" style="border:0px; /*solid #C3C8C6;*/ margin-left: -18px; height: 90px;">	
+ <div class="container hide" id="authknowsarea" style="border:0px; /*solid #C3C8C6;*/ margin-left: -18px; height: 90px;">	
 	     <div class="row form-group">
 			<div class="col-md-3">
 				 <label style="font-size: 14px;margin-left: 90px;">Authority's Name</label><br>
@@ -474,9 +501,9 @@
 			    </div>
 
 			  </div>
-
+<!-- 
 			    <div class="col-md-3"><button class="btn btn-danger" style="margin-left:340%;margin-top:-20px; width:50%; position: absolute;">Thanks</button>
-					</div>
+					</div> -->
      <br><br>
 
 
@@ -522,8 +549,32 @@
 			        
 			       
 			    
-			        <div class="col-md-3"><button class="btn btn-danger" style="margin-left:1150px;margin-top:50px; width: 50%; position: absolute;">Update</button>
+			        <div class="col-md-3"><button class="btn btn-danger" style="margin-left:1150px;margin-top:50px; width: 50%; position: absolute;" data-toggle="modal" data-target="#update">Update</button>
 					</div><br><br>
+
+					<div class="modal" id="update">
+			    <div class="modal-dialog">
+			      <div class="modal-content">
+			      
+			        <!-- Modal Header -->
+			        <div class="modal-header">
+			          
+			          <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        </div>
+			        
+			        <!-- Modal body -->
+			        <div class="modal-body">
+			         <h3 class="modal-title" style="margin-left: 130px;">Succssfully Updated!</h3>
+			        </div>
+			        
+			        <!-- Modal footer -->
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			        </div>
+			        
+			      </div>
+			    </div>
+			  </div>
 	</div>
 			    <div class="modal fade" id="myModal" role="dialog">
 			    <div class="modal-dialog">
@@ -662,4 +713,18 @@ $("#peop1").hide();
 });
 });
 </script>
-
+<!-- <script>
+$(document).ready(function(){
+  $("#authknowsarea").hide();
+$("input[type='text']").change(function(){
+if($(this).val()=="NO")
+{
+$("#authknowarea").hide();
+}
+if($(this).val()=="YES")
+{
+$("#authknowsarea").show(); 
+}
+});
+});
+ -->
