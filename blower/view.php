@@ -45,7 +45,7 @@
         $("#howdoyouaware").text(data.howdoyouaware)
         $("#personsInvolved").text(data.personsInvolved)
         $("#monetaryValue").text(data.monetaryValue)
-        $("#YES").text(data.YES)//auth
+        $("#authknows").text(data.authknows)//auth
         $("#nature").text(data.nature)
         $("#place").text(data.place)
         $("#Reward").text(data.Reward)
@@ -66,6 +66,30 @@
         }
         console.log(conversations)
         $(".conversations").html(conversations?conversations:"<p> Please start the conversation</p>")
+      }
+    })
+     $.ajax({
+      url:"http://5d1b152edd81710014e8825d.mockapi.io/fixnix/whistle/1/investigator/"+tipNo,
+      method:"GET",
+      type:"json",
+      success:function(data){
+        tip_data = data;
+        var messages_array = data.conversations.split("##")
+        var messages_list = []
+        for(var i =0 ;i<messages_array.length;i++){
+          var result = messages_array[i].split("-")
+          var datalist ={
+            user_type:result[0],
+            message: result[1],
+            time: result[2]
+          }
+          messages_list.push(datalist)
+        }
+        $(".container").removeClass('hide')
+        $("#WBUpdate").text(data.WBUpdate)
+        $("#MUpdate").text(data.MUpdate)
+        $("#encryptedSecret").text(data.encryptedSecret)
+        
       }
     })
   }
@@ -241,7 +265,7 @@
         </div>-->
         <div class="col-md-5">
           <label style="font-size: 14px;margin-left: 90px;">Authorities Know</label><br>
-          <span id="YES" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
+          <span id="authknows" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
         </div>
 
         <div class="col-md-5">
@@ -254,7 +278,7 @@
    
 
 
-         <div class="row form-group">
+    <div class="row form-group" class="container hide" id="authknowsarea">
           <div class="col-md-3">
           <label style="font-size: 14px;margin-left: 90px;">Authority's Name</label><br>
           <span id="NameAuth" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
@@ -268,7 +292,7 @@
           <span id="PhoneAuth" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
          </div>
 
-        </div>
+   </div>
           <br>
           <br>
           <div class="form-group">
@@ -376,4 +400,18 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 </script>
-
+<!-- <script>
+$(document).ready(function(){
+  $("#authknowsarea").hide();
+$("input[type='text']").change(function(){
+if($(this).val()=="NO")
+{
+$("#authknowarea").hide();
+}
+if($(this).val()=="YES")
+{
+$("#authknowsarea").show(); 
+}
+});
+});
+ -->
