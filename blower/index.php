@@ -278,8 +278,8 @@
       <div class="form-group">
            <label style="font-size: 15px;" class="col-xs-2">Are Authorities aware:</label>
            <div class="col-xs-8">
-           <input type="radio" checked="checked" name="radio2" value="NO" id="NO">No
-           <input type="radio" name ="radio2" value="YES" id="YES">Yes
+           <input type="radio" checked="checked" name="radio2" value="NO" id="authknows">No
+           <input type="radio" name="radio2" value="YES" id="authknows">Yes
          </div>
     </div>
 
@@ -453,7 +453,7 @@ $("#auth").show();
     howdoyouaware :$("#aware").val(),
     personsInvolved :$("#persons").val(),
     monetaryValue :$("#fraud").val(),
-    YES :$("#YES").val(),//authoritiesKnow
+    authknows :$("#authknows").val(),
     nature:$("#nature").val(), 
     place :$("#placeofoccurance").val(),
     Reward :$("#Reward").val(),
