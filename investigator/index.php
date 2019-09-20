@@ -45,7 +45,7 @@
 				$("#howdoyouaware").text(data.howdoyouaware)
 				$("#personsInvolved").text(data.personsInvolved)
 				$("#monetaryValue").text(data.monetaryValue)
-				$("#YES").text(data.YES)
+				$("#authknows").text(data.authknows)
                 $("#nature").text(data.nature)
 				$("#place").text(data.place)
 				$("#Reward").text(data.Reward)
@@ -96,28 +96,6 @@
 		}
 	},2000)
     
-  /*  function Updatebutton(data) {
-  $.ajax({
-    url: "https://5d1b152edd81710014e8825d.mockapi.io/fixnix/whistle/"+tip_no,
-    type: 'PUT',
-    contentType:
-       "application/json;charset=utf-8",
-    data: JSON.stringify(data),
-    success: function (data) {
-    	SMLoss :$("#SMLoss").val(),
-        MOperandi :$("#MOperandi").val(),
-        WBUpdate : $("#WBUpdate").val(),
-        MUpdate :$("#MUpdate").val(),
-
-      UpdateSuccess(data);
-    },
-    error: function (request, message, error) {
-      handleException(request, message, error);
-    }
-  });
-}*/
-
-
 </script>
 <style>
 	
@@ -262,7 +240,7 @@
 			</div>-->
 			<div class="col-md-5">
 				<label style="font-size: 14px;margin-left: 90px;">Authorities Know</label><br>
-				<span id="YES" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
+				<span id="authknows" class="form-control" style="font-size: 13px;margin-left: 90px;"></span>
 			</div>
 
 			<div class="col-md-5">
@@ -272,7 +250,7 @@
 	</div>
 
 <br>
- <div class="container hide" id="data" style="border:0px; /*solid #C3C8C6;*/ margin-left: -18px; height: 90px;">	
+ <div class="container hide" id="authknowsarea" style="border:0px; /*solid #C3C8C6;*/ margin-left: -18px; height: 90px;">	
 	     <div class="row form-group">
 			<div class="col-md-3">
 				 <label style="font-size: 14px;margin-left: 90px;">Authority's Name</label><br>
@@ -543,10 +521,6 @@
 			  
 			</div>
 
-
-
-
-
 					</div><br><br>
 			</div>
 
@@ -582,11 +556,6 @@
 
 
       
-
-
-
-
-
 </div>
 </div>
 </div>
@@ -674,9 +643,28 @@ $("#people").hide();
 });
 </script>
 
+<!-- <script>
+$(document).ready(function(){
+  $("#authknowsarea").hide();
+$("input[type='text']").change(function(){
+if($(this).val()=="NO")
+{
+$("#authknowarea").hide();
+}
+if($(this).val()=="YES")
+{
+$("#authknowsarea").show(); 
+}
+});
+});
+</script> -->
+
+
                                                   <!-- update part-->
- <script type="text/javascript">
-  function Updatebutton(){
+<script type="text/javascript">
+  function  Updatebutton(){
+  var blowdata = {
+    
     SMLoss :$("#SMLoss").val(),
     MOperandi :$("#MOperandi").val(),
     WBUpdate : $("#WBUpdate").val(),
@@ -687,7 +675,7 @@ $("#people").hide();
   }
   $.ajax({
     type:"POST",
-    url: "https://5d1b152edd81710014e8825d.mockapi.io/fixnix/whistle"
+    url: "http://5d1b152edd81710014e8825d.mockapi.io/fixnix/whistle/1/investigator",
     data : blowdata,
     success : function(res){
       console.log(res)
@@ -695,5 +683,5 @@ $("#people").hide();
 
     }
   });
-
+}
 </script>
